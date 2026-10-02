@@ -38,6 +38,13 @@ db.json
 coverage/
 .nyc_output/
 .eslintcache
+.coverage
+htmlcov/
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+*.py[cod]
+.venv/
 
 # .vscode
 .vscode

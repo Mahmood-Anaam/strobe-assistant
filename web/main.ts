@@ -8,7 +8,9 @@ import { fileToImagePart, type ImagePart } from "./image";
 // STUDENT CONFIGURATION: set this to the ACP agent's WebSocket endpoint.
 // Use wss:// when the web client is served over HTTPS.
 // -----------------------------------------------------------------------------
-const ACP_WEBSOCKET_ENDPOINT = "ws://127.0.0.1:7331/acp";
+const defaultProtocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+const defaultEndpoint = `${defaultProtocol}//${window.location.host}/acp`;
+const ACP_WEBSOCKET_ENDPOINT = import.meta.env.VITE_ACP_WEBSOCKET_ENDPOINT || defaultEndpoint;
 
 interface ChatMessage {
   role: "user" | "assistant" | "system";

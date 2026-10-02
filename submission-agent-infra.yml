@@ -1,44 +1,100 @@
 cloudInfrastructure:
-  - type: Bedrock model
-    arn: <model-id>
-    description: <one-line description>
-
-  - type: ECS service
-    arn: <arn>
-    description: <one-line description>
-
-  - type: Vector store
-    arn: <arn-or-other-identifier>
-    description: <one-line description>
-
-  - type: MCP server
-    arn: <arn-or-endpoint>
-    description: <one-line description>
-
-  - type: SQS queue
-    arn: <arn>
-    description: <one-line description>
-
-  - type: EventBridge rule
-    arn: <arn>
-    description: <one-line description>
-
-  - type: Secrets Manager secret
-    arn: <arn>
-    description: <one-line description>
-
-  - type: S3 bucket
-    arn: <arn>
-    description: <one-line description>
-
-  - type: DynamoDB table
-    arn: <arn>
-    description: <one-line description>
-
-  - type: Lambda function
-    arn: <arn>
-    description: <one-line description>
-
+- type: S3 bucket
+  arn: arn:aws:s3:::n11553758-strobe-media
+  description: Private media store reused from Strobe Assessment 1.
+- type: DynamoDB table
+  arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-users
+  description: Assessment 1 Strobe users data reused by the assistant.
+- type: DynamoDB table
+  arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+  description: Assessment 1 Strobe posts data reused by the assistant.
+- type: DynamoDB table
+  arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-comments
+  description: Assessment 1 Strobe comments data reused by the assistant.
+- type: DynamoDB table
+  arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-likes
+  description: Assessment 1 Strobe likes data reused by the assistant.
+- type: DynamoDB table
+  arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-follows
+  description: Assessment 1 Strobe follows data reused by the assistant.
+- type: DynamoDB table
+  arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-moments
+  description: Assessment 1 Strobe moments data reused by the assistant.
+- type: ECR repository
+  arn: arn:aws:ecr:ap-southeast-2:901444280953:repository/n11553758-strobe-agent
+  description: Stores the Strobe agent container image.
+- type: ECR repository
+  arn: arn:aws:ecr:ap-southeast-2:901444280953:repository/n11553758-strobe-mcp
+  description: Stores the Strobe mcp container image.
+- type: Bedrock model
+  arn: amazon.titan-embed-text-v2:0
+  description: Creates 1024-dimensional semantic-search embeddings.
+- type: Bedrock model
+  arn: apac.amazon.nova-lite-v1:0
+  description: Generates grounded chat, photo descriptions, and retrospectives when
+    account policy permits.
+- type: Vector bucket
+  arn: arn:aws:s3vectors:ap-southeast-2:901444280953:bucket/n11553758-strobe-vectors
+  description: Stores Strobe photo-description embeddings for semantic retrieval.
+- type: Vector index
+  arn: arn:aws:s3vectors:ap-southeast-2:901444280953:bucket/n11553758-strobe-vectors/index/photo-search
+  description: Runs cosine nearest-neighbour search with per-user metadata filtering.
+- type: SQS queue
+  arn: arn:aws:sqs:ap-southeast-2:901444280953:n11553758-strobe-classification
+  description: Buffers S3 photo-created events for asynchronous classification.
+- type: SQS dead-letter queue
+  arn: arn:aws:sqs:ap-southeast-2:901444280953:n11553758-strobe-classification-dlq
+  description: Retains repeatedly failed classification messages for investigation.
+- type: EventBridge rule
+  arn: arn:aws:events:ap-southeast-2:901444280953:rule/n11553758-strobe-photo-uploaded
+  description: Routes new Strobe media objects to the classification queue.
+- type: EventBridge rule
+  arn: arn:aws:events:ap-southeast-2:901444280953:rule/n11553758-strobe-daily-heartbeat
+  description: Runs the autonomous daily retrospective heartbeat.
+- type: Secrets Manager secret
+  arn: arn:aws:secretsmanager:ap-southeast-2:901444280953:secret:n11553758-strobe/mcp-api-key-jDobpH
+  description: Stores the private MCP service authentication key.
+- type: DynamoDB table
+  arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-classifications
+  description: Persists Strobe Assistant classification records.
+- type: DynamoDB table
+  arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-agent-runs
+  description: Persists Strobe Assistant agent-run records.
+- type: DynamoDB table
+  arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-idempotency
+  description: Persists Strobe Assistant idempotency records.
+- type: Lambda function
+  arn: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-classifier
+  description: Runs the classifier workflow with structured CloudWatch logging.
+- type: Lambda function
+  arn: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-heartbeat
+  description: Runs the heartbeat workflow with structured CloudWatch logging.
+- type: ECS cluster
+  arn: arn:aws:ecs:ap-southeast-2:901444280953:cluster/n11553758-strobe-cluster
+  description: Runs the independently scalable Strobe agent and MCP services.
+- type: ECS service
+  arn: arn:aws:ecs:ap-southeast-2:901444280953:service/n11553758-strobe-cluster/n11553758-strobe-agent
+  description: Hosts the ACP agent and browser chat client on Fargate.
+- type: ECS service
+  arn: arn:aws:ecs:ap-southeast-2:901444280953:service/n11553758-strobe-cluster/n11553758-strobe-mcp
+  description: Hosts the private dedicated MCP tool server on Fargate.
+- type: MCP server
+  arn: http://internal-n11553758-strobe-mcp-346815100.ap-southeast-2.elb.amazonaws.com/mcp
+  description: Exposes semantic photo search, posts, and heartbeat records as MCP
+    tools.
+- type: Internal Application Load Balancer
+  arn: arn:aws:elasticloadbalancing:ap-southeast-2:901444280953:loadbalancer/app/n11553758-strobe-mcp/d078cc2b01c36926
+  description: Provides stable private routing from the ACP agent to MCP.
+- type: Internal ALB listener
+  arn: arn:aws:elasticloadbalancing:ap-southeast-2:901444280953:listener/app/n11553758-strobe-mcp/d078cc2b01c36926/ea2da0651c921c09
+  description: Routes private MCP tool traffic to its Fargate task.
+- type: Application Load Balancer
+  arn: arn:aws:elasticloadbalancing:ap-southeast-2:901444280953:loadbalancer/app/n11553758-strobe-agent/f84629cff49d5ecf
+  description: Provides the public ACP WebSocket and chat frontend endpoint.
+- type: ALB listener
+  arn: arn:aws:elasticloadbalancing:ap-southeast-2:901444280953:listener/app/n11553758-strobe-agent/f84629cff49d5ecf/1b8aab803e29de34
+  description: Routes browser HTTP and WebSocket traffic to the ACP agent.
 metaData:
-  track: <"A" | "B">
-  qutUsernameTag: <qut-username@qut.edu.au>
+  track: A
+  qutUsernameTag: n11553758@qut.edu.au
+  agentEndpoint: http://n11553758-strobe-agent-1217585299.ap-southeast-2.elb.amazonaws.com

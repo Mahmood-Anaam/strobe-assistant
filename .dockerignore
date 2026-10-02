@@ -1,6 +1,7 @@
 node_modules
-dist
+.venv
 .git
 .gitignore
 npm-debug.log*
 *.tsbuildinfo
+docs/strobe

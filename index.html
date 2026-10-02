@@ -3,17 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A small web client for the Agent Client Protocol" />
-    <title>ACP Chat</title>
+    <meta name="description" content="Search and narrate your Strobe photo library" />
+    <title>Strobe Assistant</title>
     <link rel="stylesheet" href="/web/styles.css" />
   </head>
   <body>
     <main class="shell">
       <header class="page-header">
         <div>
-          <p class="eyebrow">Agent Client Protocol</p>
-          <h1>ACP Chat</h1>
-          <p class="subtitle">A deliberately small browser client for text and image conversations.</p>
+          <p class="eyebrow">AI photo companion</p>
+          <h1>Strobe Assistant</h1>
+          <p class="subtitle">Search your photos semantically and turn memories into narrated albums.</p>
         </div>
         <div class="header-actions">
           <button id="theme-toggle" class="secondary" type="button" data-dark-label="Dark mode" data-light-label="Light mode" aria-pressed="false">Dark mode</button>
@@ -24,13 +24,13 @@
       <section id="messages" class="messages" aria-live="polite" aria-label="Conversation">
         <div class="empty-state">
           <strong>Connected.</strong>
-          <span>Send a message to the ACP agent.</span>
+          <span>Try “find my beach photos” or “narrate my dog album”.</span>
         </div>
       </section>
 
       <form id="prompt-form" class="composer">
         <label class="sr-only" for="prompt">Message</label>
-        <textarea id="prompt" rows="3" placeholder="Send a message…" disabled></textarea>
+        <textarea id="prompt" rows="3" placeholder="Ask about your Strobe photos…" disabled></textarea>
         <div id="attachment" class="attachment" hidden></div>
         <input id="file-input" type="file" accept="image/*" hidden />
         <div class="composer-footer">
