@@ -1,0 +1,308 @@
+routing:
+- route: /v1/auth/register
+  method: POST
+  controller: auth
+  apiGatewayRoute: POST /v1/auth/register
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-auth
+  storage:
+    entity: user
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-users
+  additionalStorage: []
+- route: /v1/auth/login
+  method: POST
+  controller: auth
+  apiGatewayRoute: POST /v1/auth/login
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-auth
+  storage:
+    entity: user
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-users
+  additionalStorage: []
+- route: /v1/posts
+  method: POST
+  controller: post
+  apiGatewayRoute: POST /v1/posts
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-post
+  storage:
+    entity: post
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+  additionalStorage: []
+- route: /v1/posts/user/{userId}
+  method: GET
+  controller: post
+  apiGatewayRoute: GET /v1/posts/user/{userId}
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-post
+  storage:
+    entity: post
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+  additionalStorage:
+  - entity: user
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-users
+  - entity: like
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-likes
+  - entity: comment
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-comments
+- route: /v1/posts/{id}
+  method: GET
+  controller: post
+  apiGatewayRoute: GET /v1/posts/{id}
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-post
+  storage:
+    entity: post
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+  additionalStorage:
+  - entity: user
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-users
+  - entity: like
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-likes
+  - entity: comment
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-comments
+- route: /v1/posts/{id}
+  method: PUT
+  controller: post
+  apiGatewayRoute: PUT /v1/posts/{id}
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-post
+  storage:
+    entity: post
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+  additionalStorage: []
+- route: /v1/posts/{id}
+  method: DELETE
+  controller: post
+  apiGatewayRoute: DELETE /v1/posts/{id}
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-post
+  storage:
+    entity: post
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+  additionalStorage:
+  - entity: comment
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-comments
+  - entity: like
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-likes
+- route: /v1/posts/{id}/like
+  method: POST
+  controller: post
+  apiGatewayRoute: POST /v1/posts/{id}/like
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-post
+  storage:
+    entity: like
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-likes
+  additionalStorage:
+  - entity: post
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+- route: /v1/posts/{id}/like
+  method: DELETE
+  controller: post
+  apiGatewayRoute: DELETE /v1/posts/{id}/like
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-post
+  storage:
+    entity: like
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-likes
+  additionalStorage:
+  - entity: post
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+- route: /v1/posts/{id}/hide
+  method: POST
+  controller: post
+  apiGatewayRoute: POST /v1/posts/{id}/hide
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-post
+  storage:
+    entity: post
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+  additionalStorage: []
+- route: /v1/posts/{postId}/comments
+  method: POST
+  controller: post
+  apiGatewayRoute: POST /v1/posts/{postId}/comments
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-post
+  storage:
+    entity: comment
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-comments
+  additionalStorage:
+  - entity: post
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+  - entity: user
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-users
+- route: /v1/posts/{postId}/comments
+  method: GET
+  controller: post
+  apiGatewayRoute: GET /v1/posts/{postId}/comments
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-post
+  storage:
+    entity: comment
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-comments
+  additionalStorage:
+  - entity: post
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+  - entity: user
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-users
+- route: /v1/posts/{postId}/comments/{commentId}
+  method: DELETE
+  controller: post
+  apiGatewayRoute: DELETE /v1/posts/{postId}/comments/{commentId}
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-post
+  storage:
+    entity: comment
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-comments
+  additionalStorage: []
+- route: /v1/feed
+  method: GET
+  controller: feed
+  apiGatewayRoute: GET /v1/feed
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-feed
+  storage:
+    entity: post
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+  additionalStorage:
+  - entity: follow
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-follows
+  - entity: like
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-likes
+  - entity: comment
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-comments
+- route: /v1/users
+  method: GET
+  controller: user
+  apiGatewayRoute: GET /v1/users
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-user
+  storage:
+    entity: user
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-users
+  additionalStorage:
+  - entity: follow
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-follows
+  - entity: post
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+- route: /v1/users/{id}
+  method: GET
+  controller: user
+  apiGatewayRoute: GET /v1/users/{id}
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-user
+  storage:
+    entity: user
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-users
+  additionalStorage:
+  - entity: follow
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-follows
+  - entity: post
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+- route: /v1/users/{id}
+  method: DELETE
+  controller: user
+  apiGatewayRoute: DELETE /v1/users/{id}
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-user
+  storage:
+    entity: user
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-users
+  additionalStorage:
+  - entity: post
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+  - entity: comment
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-comments
+  - entity: like
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-likes
+  - entity: follow
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-follows
+  - entity: moment
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-moments
+- route: /v1/users/{userId}/follow
+  method: POST
+  controller: user
+  apiGatewayRoute: POST /v1/users/{userId}/follow
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-user
+  storage:
+    entity: follow
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-follows
+  additionalStorage:
+  - entity: user
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-users
+- route: /v1/users/{userId}/follow
+  method: DELETE
+  controller: user
+  apiGatewayRoute: DELETE /v1/users/{userId}/follow
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-user
+  storage:
+    entity: follow
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-follows
+  additionalStorage:
+  - entity: user
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-users
+- route: /v1/users/{userId}/followers
+  method: GET
+  controller: user
+  apiGatewayRoute: GET /v1/users/{userId}/followers
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-user
+  storage:
+    entity: follow
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-follows
+  additionalStorage:
+  - entity: user
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-users
+- route: /v1/users/{userId}/following
+  method: GET
+  controller: user
+  apiGatewayRoute: GET /v1/users/{userId}/following
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-user
+  storage:
+    entity: follow
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-follows
+  additionalStorage:
+  - entity: user
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-users
+- route: /v1/uploads/url
+  method: POST
+  controller: upload
+  apiGatewayRoute: POST /v1/uploads/url
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-upload
+  storage:
+    entity: media
+    arn: arn:aws:s3:::n11553758-strobe-media
+  additionalStorage: []
+- route: /v1/moments
+  method: POST
+  controller: moment
+  apiGatewayRoute: POST /v1/moments
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-moment
+  storage:
+    entity: moment
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-moments
+  additionalStorage: []
+- route: /v1/moments/feed
+  method: GET
+  controller: moment
+  apiGatewayRoute: GET /v1/moments/feed
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-moment
+  storage:
+    entity: moment
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-moments
+  additionalStorage:
+  - entity: follow
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-follows
+- route: /v1/moments/archive
+  method: GET
+  controller: moment
+  apiGatewayRoute: GET /v1/moments/archive
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-moment
+  storage:
+    entity: moment
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-moments
+  additionalStorage:
+  - entity: follow
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-follows
+- route: /v1/moments/{id}/hide
+  method: POST
+  controller: moment
+  apiGatewayRoute: POST /v1/moments/{id}/hide
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-moment
+  storage:
+    entity: moment
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-moments
+  additionalStorage: []
+- route: /v1/moments/{id}
+  method: DELETE
+  controller: moment
+  apiGatewayRoute: DELETE /v1/moments/{id}
+  lambdaARN: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-moment
+  storage:
+    entity: moment
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-moments
+  additionalStorage: []

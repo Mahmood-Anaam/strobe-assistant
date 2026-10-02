@@ -1,0 +1,42 @@
+cloudInfrastructure:
+  apiGatewayExecutionARN: arn:aws:execute-api:ap-southeast-2:901444280953:wd3v0i07v3
+  apiGatewayStageARN: arn:aws:apigateway:ap-southeast-2::/apis/wd3v0i07v3/stages/$default
+  apiRoute53Record: n11553758.cab432.com
+  certificateARN: arn:aws:acm:ap-southeast-2:901444280953:certificate/3e61fc2c-5f79-4351-b65b-536b5f83e491
+  cognitoARN: arn:aws:cognito-idp:ap-southeast-2:901444280953:userpool/ap-southeast-2_MURNZqAOU
+  dynamoDBPostsTableARN: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+  s3MediaStoreARN: arn:aws:s3:::n11553758-strobe-media
+  dynamoDBTableARNs:
+  - entity: user
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-users
+  - entity: post
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-posts
+  - entity: comment
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-comments
+  - entity: like
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-likes
+  - entity: follow
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-follows
+  - entity: moment
+    arn: arn:aws:dynamodb:ap-southeast-2:901444280953:table/n11553758-strobe-moments
+  lambdaARN:
+  - controller: auth
+    arn: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-auth
+  - controller: feed
+    arn: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-feed
+  - controller: moment
+    arn: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-moment
+  - controller: post
+    arn: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-post
+  - controller: user
+    arn: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-user
+  - controller: upload
+    arn: arn:aws:lambda:ap-southeast-2:901444280953:function:n11553758-strobe-upload
+  metaData:
+    qutUsernameTag: n11553758@qut.edu.au
+    testUsername: n11553758-strobe-test@example.com
+    testPassword: StrobeTest123!
+    studentDetail:
+      studentID: n11553758
+      studentFirstName: Mesh
+      studentLastName: Alsulami
